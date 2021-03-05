@@ -23,12 +23,13 @@ public class GasPriceDataAccessController {
 	@Autowired
 	private GasPriceTrendRepository gasPriceTrendRepository;
 	
-	
+	//fetch document by identifier which is the date field
 	public Optional<StateGasPrice> getRecord(String date) {
 		return gasPriceRepository.findById(date);
 		
 	}
 	
+	//fetch historical trend by querying all records. This has to be enhanced to fetch only 50 records,
 	public List<GasPriceTrend> getAllRecords() {
 		return gasPriceTrendRepository.findAll();
 	}
