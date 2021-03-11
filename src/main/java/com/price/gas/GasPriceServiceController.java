@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.price.gas.dataaccess.GasPriceDataAccessController;
-import com.price.gas.model.GasPriceTrendResult;
-import com.price.gas.model.StateGasPrice;
+import com.price.gas.model.GasPrices;
+import com.price.gas.model.GasPricesTrend;
 
 @RestController
 @RequestMapping("/gasprice")
@@ -23,20 +23,21 @@ public class GasPriceServiceController {
 	
 	//Rest API to fetch current days' gas price for a given state
 	@CrossOrigin(origins = "${crossorigin.url}")
-	@RequestMapping("/{state}")
-	public StateGasPrice getGasPriceDetails(@PathVariable("state") String stateRequest) {
+	@RequestMapping("/{date}")
+	public GasPrices getGasPriceDetails(@PathVariable("date") String date) {
 		
-		return gasPriceDataAccessController.getRecord(new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime())).get();
+		return gasPriceDataAccessController.getRecord(new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime())).get();
     	
 	}
+	
 	
 	//Rest API to fetch historical trend on gas price 
 	@CrossOrigin(origins = "${crossorigin.url}")
 	@RequestMapping("/trend")
-	public GasPriceTrendResult getGasPriceTrend() {
-		GasPriceTrendResult result = new GasPriceTrendResult();
-		result.setDate(new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime()));
-		result.setGasPriceTrendList(gasPriceDataAccessController.getAllRecords());
+	public GasPricesTrend getGasPriceTrend() {
+		GasPricesTrend result = new GasPricesTrend();
+		result.setDate(new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime()));
+		result.setGasPricesList(gasPriceDataAccessController.getAllRecords());
 		return result;
     
 	}
