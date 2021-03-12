@@ -26,7 +26,7 @@ public class GasPriceServiceController {
 	@RequestMapping("/{date}")
 	public GasPrices getGasPriceDetails(@PathVariable("date") String date) {
 		
-		return gasPriceDataAccessController.getRecord(new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime())).get();
+		return gasPriceDataAccessController.getRecord(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())).get();
     	
 	}
 	
@@ -36,7 +36,7 @@ public class GasPriceServiceController {
 	@RequestMapping("/trend")
 	public GasPricesTrend getGasPriceTrend() {
 		GasPricesTrend result = new GasPricesTrend();
-		result.setDate(new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime()));
+		result.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
 		result.setGasPricesList(gasPriceDataAccessController.getAllRecords());
 		return result;
     
