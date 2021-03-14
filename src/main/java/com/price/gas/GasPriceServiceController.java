@@ -41,5 +41,11 @@ public class GasPriceServiceController {
 		return result;
     
 	}
+	
+	@RequestMapping("/service/heartbeat")
+	public String getProducerHeartBeat() {
+		System.out.println("Gas Price Service Alive");
+		return "Gas Price Service Alive";
+	}
 
 }
